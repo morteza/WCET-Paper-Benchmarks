@@ -5,14 +5,20 @@
 
 class FFTCalcTask : public QThread
 {
-    Q_OBJECT
 public:
-    explicit FFTCalcTask(QObject *parent = 0);
-    
-signals:
-    
-public slots:
-    
+    void run();
+};
+
+class SortTask : public QThread
+{
+public:
+    void run(QString filePath);
+};
+
+class MatrixMultiplyTask : public QThread
+{
+public:
+    void run(QString filePath);
 };
 
 #endif // TASKS_H

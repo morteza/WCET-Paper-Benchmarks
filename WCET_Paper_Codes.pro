@@ -16,9 +16,13 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-    tasks.cpp
+    tasks.cpp \
+    manager.cpp
 
 HEADERS += \
-    tasks.h
+    tasks.h \
+    manager.h
+
+
 
 
