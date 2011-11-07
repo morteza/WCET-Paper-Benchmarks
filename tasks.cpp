@@ -15,7 +15,6 @@ void MatrixMultiplyTask::run(QString filePath)
     float[][] c;
 
     // read two input square matrices into a[][] and b[][]
-
     QFile inputFile(filePath);
     if (!inputFile.open(QIODevice::ReadOnly | QIODevice::Text))
         return; // FAULT occurs here
@@ -85,8 +84,21 @@ void SortTask::run(QString filePath)
     }
 
 
-    // sort
-    // write output sorted seqence
+    //TODO: sort
+
+    // write output sorted sequence into file (if necessary)
+    /**
+    QFile outputFile(outputPath);
+    if (!outputFile.open(QIODevice::WriteOnly | QIODevice::Text))
+        return; // FAULT occurs here
+
+    QTextStream output(&outputFile);
+    for (int i = 0 ; i < size ; i++)
+    {
+        output << numbers[i] << " ";
+    }
+    output << "\n";
+    */
 
     // cleanup memory
     delete[] numbers;
