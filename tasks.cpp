@@ -1,11 +1,55 @@
 #include "tasks.h"
 #include <QThread>
 
+void DFTCalcTask::run()
+{
+    double arg;
+    double cosArg,sinArg;
+
+
+    //TODO: read x1[], y1[], and size from file or something
+
+    double[] x2 = new double[size];
+    double[] y2 = new double[size];
+
+    if (x2 == NULL || y2 == NULL)
+       return; // FAULT occurs
+
+    for (long i=0;i<size;i++) {
+       x2[i] = 0;
+       y2[i] = 0;
+       arg = -2.0 * 3.141592654 * (double)i / (double)size;
+       for (long k=0;k<size;k++) {
+          cosArg = cos(k * arg);
+          sinArg = sin(k * Arg);
+          x2[i] += (x1[k] * cosArg - y1[k] * sinArg);
+          y2[i] += (x1[k] * sinArg + y1[k] * cosArg);
+       }
+    }
+
+    for (long i=0;i<size;i++) {
+        x1[i] = x2[i] / (double)size;
+        y1[i] = y2[i] / (double)size;
+    }
+
+    delete[] x2;
+    delete[] y2;
+
+    //TODO: store x1[], and y1[] into output file(s)
+
+    delete[] x1;
+    delete[] y1;
+
+    exec();
+    //quit();
+}
+
 void FFTCalcTask::run()
 {
     exec();
     //quit();
 }
+
 
 void MatrixMultiplyTask::run(QString filePath)
 {
@@ -70,7 +114,8 @@ void MatrixMultiplyTask::run(QString filePath)
 
 void SortTask::run(QString filePath)
 {
-    float[] numbers;
+    double[] numbers;
+    int size;
 
     // read input numbers into numbers[]
     QFile inputFile(filePath);
@@ -80,11 +125,28 @@ void SortTask::run(QString filePath)
     QTextStream input(&filePath);
     while (!input.atEnd()) {
         QString line = input.readLine();
-        //TODO: process line
+        //TODO: process line and stores into numbers
     }
 
 
-    //TODO: sort
+    // Bubble sort
+    bool isSwapped = true;
+    int tmp, j = 0;
+    while (isSwapped)
+    {
+        isSwapped = false;
+        j++;
+        for (int i = 0; i < size - j; i++)
+        {
+            if (numbers[i] > numbers[i + 1])
+            {
+                tmp = numbers[i];
+                numbers[i] = numbers[i + 1];
+                numbers[i + 1] = tmp;
+                isSwapped = true;
+            }
+        }
+    }
 
     // write output sorted sequence into file (if necessary)
     /**

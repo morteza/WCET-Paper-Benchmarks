@@ -3,6 +3,12 @@
 
 #include <QThread>
 
+class DFTCalcTask : public QThread
+{
+public:
+    void run();
+};
+
 class FFTCalcTask : public QThread
 {
 public:
