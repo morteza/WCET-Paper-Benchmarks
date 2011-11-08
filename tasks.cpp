@@ -15,11 +15,13 @@ void DFTCalcTask::run()
     if (x2 == NULL || y2 == NULL)
        return; // FAULT occurs
 
-    for (long i=0;i<size;i++) {
+    for (long i=0;i<size;i++)
+    {
        x2[i] = 0;
        y2[i] = 0;
        arg = -2.0 * 3.141592654 * (double)i / (double)size;
-       for (long k=0;k<size;k++) {
+       for (long k=0;k<size;k++)
+       {
           cosArg = cos(k * arg);
           sinArg = sin(k * Arg);
           x2[i] += (x1[k] * cosArg - y1[k] * sinArg);
@@ -27,7 +29,8 @@ void DFTCalcTask::run()
        }
     }
 
-    for (long i=0;i<size;i++) {
+    for (long i=0;i<size;i++)
+    {
         x1[i] = x2[i] / (double)size;
         y1[i] = y2[i] / (double)size;
     }
